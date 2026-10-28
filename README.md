@@ -5,20 +5,18 @@ flowchart TD
     subgraph dockerStack["Docker: 4 contenedores en ejecución"]
         
         subgraph frontend["Red Virtual: frontend"]
-            container1["Nginx<br/>Puerto 80"]
+            container1["Nginx<br/>"]
+            container2["Aplicación Flask<br/>"]
         end
 
         subgraph backend["Red Virtual: backend"]
             container3[("PostgreSQL")]
             container4[("Redis · caché")]
         end
-        
-        %% La aplicación vive en la intersección, pero la ponemos aquí visualmente
-        container2["Aplicación Flask<br/>Puerto 8000"]
 
         container1 -->|"Proxy inverso · puerto 8000"| container2
-        container2 -->|"Consultas"| container3
-        container2 -->|"Lectura y escritura"| container4
+        container2 --> container3
+        container2 --> container4
     end
 
     usuario -->|"HTTP · puerto externo 8080 → puerto 80"| container1
