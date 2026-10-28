@@ -23,6 +23,10 @@ def get_redis():
 def health():
     return jsonify(status="ok")
 
+@app.get("/")
+def index():
+    return jsonify(message="Hola desde mi API")
+
 @app.get("/ready")
 def ready():
     # Readiness: "puedo atender tráfico", verifica dependencias.
