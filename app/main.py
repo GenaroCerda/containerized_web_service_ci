@@ -34,7 +34,7 @@ def ready():
         with get_db() as conn, conn.cursor() as cur:
             cur.execute("SELECT 1")
         get_redis().ping()
-    except Exception as exc:
+    except Exception as exc: # noqa: BLE001
         return jsonify(status="not ready", error=str(exc)), 503
     return jsonify(status="ready")
 
