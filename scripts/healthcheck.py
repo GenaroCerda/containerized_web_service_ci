@@ -27,7 +27,7 @@ def check(url):
                 if resp.status == 200:
                     return True, f"200 en {ms:.0f} ms"
                 last = f"status {resp.status}"
-        except Exception as exc:
+        except Exception as exc: # noqa: BLE001
             last = str(exc)
         time.sleep(1)
     return False, last
@@ -43,7 +43,7 @@ def notify(message):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     try:
         urllib.request.urlopen(url, data=data, timeout=10)
-    except Exception as exc:
+    except Exception as exc: # noqa: BLE001
         print(f"No se pudo notificar: {exc}", file=sys.stderr)
 
 
